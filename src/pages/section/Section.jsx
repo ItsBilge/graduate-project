@@ -6,17 +6,25 @@ import Navigation from "../navigation/Navigation";
 
 function Section() {
   const url = "https://localhost:7007/api/Activities";
+  const cateUrl = "https://localhost:7007/api/Categories";
   const [activities, setActivities] = useState([]);
   const [isPending, setIsPending] = useState(true);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getActivities();
+    getActivityCate();
   }, []);
 
   const getActivities = async () => {
     const res = await axios.get(url);
     setActivities(res.data);
     setIsPending(false);
+  };
+
+  const getActivityCate = async () => {
+    const res = await axios.get(cateUrl);
+    setCategories(res.data);
   };
 
   return (
@@ -103,61 +111,23 @@ function Section() {
             <div className="container">
               <nav>
                 <ul className="categories-menu">
-                  <li>
-                    <span className="d-flex align-items-center">
-                      <i
-                        className="fa-solid fa-music me-3"
-                        style={{ fontSize: 35 }}
-                      />
-                      <Link title="konser" to="">
-                        Konser
-                      </Link>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="d-flex align-items-center">
-                      <i
-                        className="fa-solid fa-masks-theater me-3"
-                        style={{ fontSize: 35 }}
-                      />
-                      <Link title="tiyatro" to="">
-                        Tiyatro
-                      </Link>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="d-flex align-items-center">
-                      <i
-                        className="fa-regular fa-face-grin-tears me-3"
-                        style={{ fontSize: 35 }}
-                      />
-                      <Link title="stand-up" to="">
-                        stand up
-                      </Link>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="d-flex align-items-center">
-                      <i
-                        className="fa-solid fa-people-roof me-3"
-                        style={{ fontSize: 35 }}
-                      />
-                      <Link title="aile" to="">
-                        aile
-                      </Link>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="d-flex align-items-center">
-                      <i
-                        className="fa-solid fa-volleyball me-3"
-                        style={{ fontSize: 35 }}
-                      />
-                      <Link title="spor" to="">
-                        spor
-                      </Link>
-                    </span>
-                  </li>
+                  {categories.map((category) => (
+                    <li>
+                      <span className="d-flex align-items-center">
+                        <i
+                          className="fa-solid fa-music me-3"
+                          style={{ fontSize: 35 }}
+                        />
+                        <Link
+                          id={category.id}
+                          className="main-header-category"
+                          to={`/activitybycategory/${category.id}`}
+                        >
+                          {category.name}
+                        </Link>
+                      </span>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>
