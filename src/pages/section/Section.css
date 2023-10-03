@@ -1,0 +1,142 @@
+/**** section categories *****/
+:root {
+  --primary-color: #e76f51;
+  --secondary-color: #0e9b4e;
+  --light-color: #f8f9fa;
+  --dark-color: #6c757d;
+  --black-color: #121212;
+  --grey-color: #00000026;
+}
+#home .categories {
+  margin-bottom: 30px;
+  margin-top: -19px;
+  position: relative;
+  z-index: 1;
+}
+@media screen and (max-width: 1200px) {
+  #home .categories {
+    display: none;
+  }
+}
+#home .categories-menu {
+  display: flex;
+  grid-gap: 0 14px;
+  gap: 0 66px;
+}
+#home .categories-menu i {
+  color: var(--black-color);
+}
+#home .categories-menu li {
+  height: 80px;
+  width: 100%;
+  background: var(--light-color);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  grid-gap: 0 14px;
+  gap: 0 14px;
+  box-shadow: 0 3px 3px var(--grey-color);
+  border: 5px solid var(--light-color);
+  transition: 0.3s transform, 0.3s border-color;
+  padding: 0 30px 0 15px;
+}
+#home .categories-menu li:hover {
+  border: 5px solid var(--secondary-color);
+  cursor: pointer;
+}
+#home .categories-menu li a {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  flex: 1;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+/**** section events */
+
+.event__link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: var(--black-color);
+}
+.event_title {
+  margin-bottom: 25px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--grey-color);
+}
+
+#event_music,
+#event_scene,
+#event_sport,
+.row a {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+#event_music,
+#event_scene,
+#event_sport,
+.row .card-text {
+  font-size: 20px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+@media (max-width: 770px) {
+  #event_music,
+  #event_scene,
+  #event_sport,
+  .row .card-text {
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: center;
+  }
+  #event_music .event_title {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--grey-color);
+    font-size: 18px;
+  }
+}
+#event_music .col-md-4 {
+  width: 33%;
+  box-shadow: 0 3px 3px var(--grey-color);
+  padding: 20px;
+}
+
+#event_sport .col-md-6 {
+  padding: 17px;
+  box-shadow: 0 3px 3px var(--grey-color);
+}
+#event_sport img {
+  height: 167px;
+  margin-top: 9px;
+}
+#event_sport h3 {
+  padding-bottom: 5px;
+}
+#event_scene .col-md-6 {
+  padding: 25px;
+  box-shadow: 0 3px 3px var(--grey-color);
+}
+
+#event_music,
+#event_scene,
+.card {
+  border: none;
+}
+#event_music,
+#event_scene .card img {
+  width: 100%;
+}
+.events__details .col-md-6 {
+  padding: 32px;
+}

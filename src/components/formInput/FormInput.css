@@ -1,0 +1,14 @@
+form span {
+  font-size: 14px;
+  padding: 5px;
+  color: red;
+  display: none;
+}
+input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+input:invalid[focused="true"] ~ span {
+  display: block;
+  color: red;
+}

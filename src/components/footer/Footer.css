@@ -1,0 +1,77 @@
+/****** footer *****/
+:root {
+  --primary-color: #e76f51;
+  --secondary-color: #2a9d8f;
+  --light-color: #f8f9fa;
+  --dark-color: #6c757d;
+}
+#footer {
+  background: var(--dark-color);
+  width: 100%;
+  color: var(--light-color);
+  padding-top: 30px;
+  margin-top: 70px;
+  letter-spacing: 0.02em;
+  font-family: "Montserrat", sans-serif;
+}
+.social {
+  padding: 0;
+}
+.social li {
+  list-style: none;
+  padding-right: 18px;
+  font-size: 30px;
+}
+#footer .social_link {
+  color: var(--light-color);
+}
+#footer .social_link:hover {
+  color: var(--primary-color);
+}
+#footer .about_us li {
+  list-style: none;
+  margin-top: 10px;
+  font-size: 18px;
+}
+#footer .about_us li a {
+  color: var(--light-color);
+  font-size: 14px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+#footer .about_us li a:hover {
+  opacity: 0.7;
+}
+#footer .about_us {
+  padding: 0;
+}
+#footer .tredemark {
+  text-align: center;
+  color: var(--light-color);
+  font-size: 12px;
+  font-weight: 400;
+  width: 35%;
+  margin-top: 15px;
+}
+#footer .container {
+  border-bottom: 1px solid var(--light-color);
+}
+#footer .tredemark_text {
+  color: var(--light-color);
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  float: left;
+  text-align: center;
+  margin-top: 10px;
+}
+#event_music img:hover {
+  transform: scale(1.1);
+  transition-duration: 0.6s;
+}
+#footer h4 {
+  border-bottom: 2px solid var(--light-color);
+  width: 60%;
+  padding-bottom: 5px;
+}

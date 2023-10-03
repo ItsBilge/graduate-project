@@ -1,0 +1,33 @@
+#login-acount i {
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  color: #959191 !important;
+}
+@media (min-width: 769px) {
+  #login-acount .activation-link {
+    display: flex;
+    justify-content: end;
+  }
+}
+@media (min-width: 769px) {
+  #login-acount {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+    margin: 84px auto 100px;
+    width: 369px;
+  }
+}
+@media (max-width: 768px) {
+  #login-acount {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin: 84px auto 100px;
+    width: 369px;
+  }
+}
