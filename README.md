@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# Aloha Academy Graduation Project 
+## Etkinlik web sitesi
+BiMoLa adını verdiğim etkinlik sitesinde konser, tiyatro, stund-up, aile ve spor kategorilerine göre çeşitli mekanlarda gerçekleşen etkinlikler bulunmaktadır. Kullanıcı kendine uygun tarih, konum ve saate göre etkinlik seçimi yapıp sepetine ekleyebilmektedir. Proje Reactjs kullanılarak yapılmıştır.
+## Projeye başlarken indirilmesi gereken paketler
+- `npx create-react-app graduate-project (projeye verilen isim)`
+- `npm install react-router-dom`
+- `npm install axios`
+- `npm install sweetalert2`
+## BrowserRouter
+react-router-dom'u indirdikten sonra index.js dosyasında app dosyasını BrowserRouter ile çevrelemiz gerekiyor.
+```
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  import App from "./App";
+  import { BrowserRouter } from "react-router-dom";
+  
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+```
+## Routes ve Route kullanımı
+Web sitesinde header ve footer alanı sabit olmalı ve sadece section alanı seçilen olaya göre değişmelidir. Bunun için App.js dosyasında Header ve Footer alanını Routes sarmalının dışında tutuyoruz. Oluşturduğumuz bütün jsx dosyalarını app.js içine dahil ettikten sonra aynı zamanda import edildiğinden emin olalım.
+```
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Section from "./pages/section/Section";
+import Footer from "./components/footer/Footer";
+import Register from "./pages/aboutLogin/Register";
+import UserLogin from "./pages/aboutLogin/UserLogin";
+import MaximumUniq from "./pages/locations/MaximumUniq";
+import HangOutpsm from "./pages/locations/HangOutpsm";
+import ActivityDetail from "./pages/activityDetail/ActivityDetail";
+import ActivityByCategory from "./pages/activityByCategory/ActivityByCategory";
+import SearchResult from "./pages/SearchResult";
+import Basket from "./pages/basket/Basket";
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+return (
+    <div className="App">
+      <Header basket={basket} />
+      <Routes>
+        <Route exact path="/" element={<Section />} />
+        <Route path="/login" element={<Register />} />
+        <Route path="/userlogin" element={<UserLogin />} />
+        <Route path="/maximumUniq" element={<MaximumUniq />} />
+        <Route
+          path="/hangoutPsm"
+          element={<HangOutpsm addBasket={addBasket} />}
+        />
+        <Route path="/activities/:id" element={<ActivityDetail />} />
+        <Route
+          path="/activitybycategory/:id"
+          element={<ActivityByCategory addbasket={addBasket} />}
+        />
+        <Route
+          path="/searchResult/:query"
+          element={<SearchResult addbasket={addBasket} />}
+        />
+        <Route
+          path="/basket"
+          element={<Basket basket={basket} removeBasket={removeBasket} />}
+        />
+      </Routes>
+      <Footer />
+    </div>
+  );
+}
+```
+## Header JSX
+header alanında bulunan etkinlik kategorilerini database'den axios kullanarak çektim.
+```
+function Header({ basket }) {
+  const cateUrl = "https://localhost:7007/api/Categories";
+  const [categories, setCategories] = useState([]);
+  const [query, setquery] = useState("");
 
-## Available Scripts
+  useEffect(() => {
+    getActivityCate();
+  }, []);
 
-In the project directory, you can run:
+  const getActivityCate = async () => {
+    const res = await axios.get(cateUrl);
+    setCategories(res.data);
+  };
+```
+oluşturduğum categories'i map kullanarak ekrana yansıttım
+```
+return (
+  <div id="main-categories">
+    <ul id="main-header-categories">
+        {categories.map((category) => (
+           <li>
+              <Link
+                  id={category.id}
+                  className="main-header-category"
+                  to={`/activitybycategory/${category.id}`}
+              >
+                {category.name}
+              </Link>
+           </li>
+        ))}
+    </ul>
+  </div>
+```
+## Section JSX
+Aynı şekilde ana sayfada bulunan etkinlikler veri tabanından ekrana yansıtıldı.
+```
+function Section() {
+  const url = "https://localhost:7007/api/Activities";
+  const cateUrl = "https://localhost:7007/api/Categories";
+  const [activities, setActivities] = useState([]);
+  const [isPending, setIsPending] = useState(true);
+  const [categories, setCategories] = useState([]);
 
-### `npm start`
+  useEffect(() => {
+    getActivities();
+    getActivityCate();
+  }, []);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  const getActivities = async () => {
+    const res = await axios.get(url);
+    setActivities(res.data);
+    setIsPending(false);
+  };
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  const getActivityCate = async () => {
+    const res = await axios.get(cateUrl);
+    setCategories(res.data);
+  };
+```
+```
+        <div className="row">
+                  {isPending && <div>Loading...</div>}
+                  {activities.map((activity) => (
+                    <div className="col-md-4">
+                      <Link
+                        to={`/activities/${activity.id}`}
+                        key={activity.id}
+                        className="card"
+                      >
+                        <img
+                          className="card-img"
+                          src={activity.activityImage}
+                        />
+                        <h3 className="card-text">{activity.title}</h3>
+                      </Link>
+                    </div>
+                  ))}
+         </div>
+```
+## Etkinlik Detay sayfası
+Section jsx te bulunan her bir activity'e tıklanıldığında Link içinde bulunan "to" ile ActivityDetails componentine yönlendirme yapıldı. Alınan activity.id ile her bir aktivite için kayıtlı title, img ve açıklama ActivityDetail sayfasına yansıtıldı. Bunun için "useParams()" kullandım.
+```
+const ActivityDetail = () => {
+  const { id } = useParams();
+  const [events, setEvents] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const locUrl = "https://localhost:7007/api/Location/";
 
-### `npm test`
+  axios.get(locUrl).then((res) => setLocations(res.data[0]));
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  useEffect(() => {
+    const url = "https://localhost:7007/api/Activities/" + id;
+    axios
+      .get(url)
+      .then((res) => setEvents(res.data[0]))
+      .catch((err) => console.error(err));
+  }, [id]);
+```
+```
+return (
+  <h1 className="text-black">{events.title}</h1>
+  <div className="ms-4">Tarih: {events.activityDate}</div>
+  <img className="card-img" src={events.activityImage} alt="" />
+  <div className="mb-5 mt-3 text">{events.description}</div>
+  <span className="mb-3">{events.ticketprice} TL</span>
+)
+```
