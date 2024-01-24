@@ -14,42 +14,12 @@ https://github.com/ItsBilge/graduate-project/assets/97183087/d8a044e3-81f5-48b6-
 - Etkinlik detay sayfası
 
 https://github.com/ItsBilge/graduate-project/assets/97183087/572e6d9e-444b-49c2-9c02-c8f164bf454a
-## Header JSX
-header alanında bulunan etkinlik kategorilerini database'den axios kullanarak çektim.
-```
-function Header({ basket }) {
-  const cateUrl = "https://localhost:7007/api/Categories";
-  const [categories, setCategories] = useState([]);
-  const [query, setquery] = useState("");
 
-  useEffect(() => {
-    getActivityCate();
-  }, []);
+- Etkinlik arama
 
-  const getActivityCate = async () => {
-    const res = await axios.get(cateUrl);
-    setCategories(res.data);
-  };
-```
-oluşturduğum categories'i map kullanarak ekrana yansıttım
-```
-return (
-  <div id="main-categories">
-    <ul id="main-header-categories">
-        {categories.map((category) => (
-           <li>
-              <Link
-                  id={category.id}
-                  className="main-header-category"
-                  to={`/activitybycategory/${category.id}`}
-              >
-                {category.name}
-              </Link>
-           </li>
-        ))}
-    </ul>
-  </div>
-```
+https://github.com/ItsBilge/graduate-project/assets/97183087/5c0c6601-0a54-4177-b244-8975bedf51a1
+
+
 ## Section JSX
 Aynı şekilde ana sayfada bulunan etkinlikler veri tabanından ekrana yansıtıldı.
 ```
