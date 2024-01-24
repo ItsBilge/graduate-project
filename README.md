@@ -8,7 +8,7 @@ BiMoLa adını verdiğim etkinlik sitesinde konser, tiyatro, stund-up, aile ve s
 - `npm install sweetalert2`
 ## Features
 -Tüm içerikleri ana sayfada göster
-https://github.com/ItsBilge/graduate-project/assets/97183087/bcdbfa2a-f0c8-4864-8098-016ee573fc92
+![homepage](https://github.com/ItsBilge/graduate-project/assets/97183087/bcdbfa2a-f0c8-4864-8098-016ee573fc92)
 ## Routes ve Route kullanımı
 Web sitesinde header ve footer alanı sabit olmalı ve sadece section alanı seçilen olaya göre değişmelidir. Bunun için App.js dosyasında Header ve Footer alanını Routes sarmalının dışında tutuyoruz. Oluşturduğumuz bütün jsx dosyalarını app.js içine dahil ettikten sonra aynı zamanda import edildiğinden emin olalım.
 ```
