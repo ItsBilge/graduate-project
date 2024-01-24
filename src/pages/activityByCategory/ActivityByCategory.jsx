@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import "../css/MaximumUniq.css";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addBasket } from "../../store/basketSlice";
 import axios from "axios";
 
-function ActivityByCategory({ addbasket }) {
+function ActivityByCategory() {
+  const dispatch = useDispatch();
+
   const { id } = useParams();
   const [cates, setCates] = useState([]);
   const [allCate, setallCate] = useState([]);
@@ -21,6 +25,10 @@ function ActivityByCategory({ addbasket }) {
       .then((res) => setCates(res.data))
       .catch((err) => console.error(err));
   }, [id]);
+
+  const addToBasket = (cate) => {
+    dispatch(addBasket(cate));
+  };
 
   return (
     <>
@@ -62,7 +70,7 @@ function ActivityByCategory({ addbasket }) {
                                         <em>TL</em>
                                       </span>
                                       <button
-                                        onClick={() => addbasket(cate)}
+                                        onClick={() => addToBasket(cate)}
                                         className="btn"
                                       >
                                         <i className="fa-solid fa-basket-shopping" />

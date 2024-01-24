@@ -5,9 +5,12 @@ import axios from "axios";
 import LoginPage from "../pages/aboutLogin/LoginPage";
 import UserLogin from "../pages/aboutLogin/UserLogin";
 import UserHeader from "./UserHeader";
+import { useSelector } from "react-redux";
 
 function Header({ basket }) {
   const cateUrl = "https://localhost:7007/api/Categories";
+  const { loginStatus } = useSelector((state) => state.loginStore);
+
   const [categories, setCategories] = useState([]);
   const [query, setquery] = useState("");
 
@@ -69,11 +72,7 @@ function Header({ basket }) {
                 <i className="fa-solid fa-magnifying-glass" />
               </Link>
             </form>
-            {<UserLogin /> === true ? (
-              <LoginPage />
-            ) : (
-              <UserHeader basket={basket} />
-            )}
+            {loginStatus ? <UserHeader basket={basket} /> : <LoginPage />}
           </div>
         </nav>
       </header>

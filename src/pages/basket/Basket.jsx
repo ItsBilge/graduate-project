@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-function Basket({ basket, removeBasket }) {
+function Basket({ removeBasket }) {
+  const { baskets } = useSelector((state) => state.basket);
+  debugger;
   return (
     <div className="row p-5">
-      {basket.length > 0 ? (
-        basket.map((activity) => (
+      {baskets ? (
+        baskets.map((activity) => (
           <div className="col-md-3">
             <div className="card">
               <img

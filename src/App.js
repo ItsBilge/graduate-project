@@ -27,7 +27,7 @@ function App() {
       showConfirmButton: false,
       timer: 1500,
     });
-    localStorage.setItem("basket", JSON.stringify(newBasket));
+    localStorage.setItem("baskets", JSON.stringify(newBasket));
   };
 
   const removeBasket = (id) => {
@@ -47,7 +47,7 @@ function App() {
         if (activityIndex > -1) {
           baskets.splice(activityIndex, 1);
           setBasket(baskets);
-          localStorage.setItem("basket", JSON.stringify(baskets));
+          localStorage.setItem("baskets", JSON.stringify(baskets));
         }
       }
     });

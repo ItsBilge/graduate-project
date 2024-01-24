@@ -7,6 +7,7 @@ function UserLogin() {
   const url = "https://localhost:7007/api/Register/login";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(false);
 
   const [loginStatus, setLoginStatus] = useState("");
 

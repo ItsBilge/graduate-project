@@ -1,8 +1,10 @@
 import React from "react";
 import "../pages/aboutLogin/Header.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function UserHeader({ basket }) {
+function UserHeader() {
+  const { baskets } = useSelector((state) => state.basket);
   return (
     <>
       <div className="d-flex justify-content-center align-items-center">
@@ -15,7 +17,7 @@ function UserHeader({ basket }) {
             to="/basket"
             className="fs-5 ms-2 text-decoration-none text-white"
           >
-            Sepetim ({basket.length})
+            Sepetim ({baskets.length})
           </Link>
         </a>
       </div>
