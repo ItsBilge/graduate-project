@@ -10,53 +10,10 @@ BiMoLa adını verdiğim etkinlik sitesinde konser, tiyatro, stund-up, aile ve s
 - Tüm içerikleri ana sayfada göster
 
 https://github.com/ItsBilge/graduate-project/assets/97183087/d8a044e3-81f5-48b6-8740-3c13091f86b4
-## Routes ve Route kullanımı
-Web sitesinde header ve footer alanı sabit olmalı ve sadece section alanı seçilen olaya göre değişmelidir. Bunun için App.js dosyasında Header ve Footer alanını Routes sarmalının dışında tutuyoruz. Oluşturduğumuz bütün jsx dosyalarını app.js içine dahil ettikten sonra aynı zamanda import edildiğinden emin olalım.
-```
-import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Section from "./pages/section/Section";
-import Footer from "./components/footer/Footer";
-import Register from "./pages/aboutLogin/Register";
-import UserLogin from "./pages/aboutLogin/UserLogin";
-import MaximumUniq from "./pages/locations/MaximumUniq";
-import HangOutpsm from "./pages/locations/HangOutpsm";
-import ActivityDetail from "./pages/activityDetail/ActivityDetail";
-import ActivityByCategory from "./pages/activityByCategory/ActivityByCategory";
-import SearchResult from "./pages/SearchResult";
-import Basket from "./pages/basket/Basket";
 
-return (
-    <div className="App">
-      <Header basket={basket} />
-      <Routes>
-        <Route exact path="/" element={<Section />} />
-        <Route path="/login" element={<Register />} />
-        <Route path="/userlogin" element={<UserLogin />} />
-        <Route path="/maximumUniq" element={<MaximumUniq />} />
-        <Route
-          path="/hangoutPsm"
-          element={<HangOutpsm addBasket={addBasket} />}
-        />
-        <Route path="/activities/:id" element={<ActivityDetail />} />
-        <Route
-          path="/activitybycategory/:id"
-          element={<ActivityByCategory addbasket={addBasket} />}
-        />
-        <Route
-          path="/searchResult/:query"
-          element={<SearchResult addbasket={addBasket} />}
-        />
-        <Route
-          path="/basket"
-          element={<Basket basket={basket} removeBasket={removeBasket} />}
-        />
-      </Routes>
-      <Footer />
-    </div>
-  );
-}
-```
+- Etkinlik detay sayfası
+
+https://github.com/ItsBilge/graduate-project/assets/97183087/572e6d9e-444b-49c2-9c02-c8f164bf454a
 ## Header JSX
 header alanında bulunan etkinlik kategorilerini database'den axios kullanarak çektim.
 ```
